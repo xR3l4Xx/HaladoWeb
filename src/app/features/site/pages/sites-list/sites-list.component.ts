@@ -3,6 +3,7 @@ import { Site } from 'app/core/models';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataStore } from 'app/core/stores';
 import { map } from 'rxjs';
+import { SiteService } from '../../services/site.service';
 
 @Component({
   selector: 'app-sites-list',
@@ -13,7 +14,7 @@ export class SitesListComponent implements OnInit {
 
   sites: Site[] = [];
 
-  constructor(public store: DataStore, public modalService: NgbModal) { }
+  constructor(public siteService: SiteService, public modalService: NgbModal) { }
 
   addSite() {
 
@@ -24,12 +25,8 @@ export class SitesListComponent implements OnInit {
   }
 
   ngOnInit(): void {
-    this.store.state$
-      .pipe(
-        map(state => state.sites))
-      .subscribe(data => {
-        this.sites = data.sort((a, b) => a.id - b.id);
-      })
+    this.siteService.fetchAllSites((sites: Site[]) => this.sites = sites.sort((a: Site, b: Site) => a.id - b.id))
+    
   }
 
 }

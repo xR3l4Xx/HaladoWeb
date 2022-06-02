@@ -1,6 +1,2 @@
-<div *ngFor="let site of sites">
-    {{site.id}} - {{site.name}}
-    <button (click)="openEditSiteModal(site)">Edit</button>
-</div>
-
+<app-site-table [sites]="sites"></app-site-table>
 <button (click)="addSite()">add</button>

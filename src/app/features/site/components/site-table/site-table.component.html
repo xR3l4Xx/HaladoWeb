@@ -1,0 +1,5 @@
+<div *ngFor="let site of sites">
+    {{site.id}} - {{site.name}} - {{site.deleted}}
+    <button (click)="onDeleteSite(site)">Delete</button>
+    <button (click)="onEditSite(site)">Edit</button>
+</div>

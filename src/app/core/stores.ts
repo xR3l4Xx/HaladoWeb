@@ -37,7 +37,11 @@ export class DataStore extends Store<DatabaseState> {
     }
 
     updateSite(site: Site): void {
-
+        const siteId = site.id;
+        this.setState({
+            ...this.state,
+            sites: [...this.state.sites.filter(s => s.id != siteId), site]
+        });
     }
 
     addOwner(owner: Owner): void {
