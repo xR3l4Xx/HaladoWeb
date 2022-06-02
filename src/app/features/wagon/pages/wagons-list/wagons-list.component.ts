@@ -1,4 +1,7 @@
 import { Component, OnInit } from '@angular/core';
+import { Wagon } from 'app/core/models';
+import { DataStore } from 'app/core/stores';
+import { takeUntil, map } from 'rxjs';
 
 @Component({
   selector: 'app-wagons-list',
@@ -7,9 +10,28 @@ import { Component, OnInit } from '@angular/core';
 })
 export class WagonsListComponent implements OnInit {
 
-  constructor() { }
+  wagons: Wagon[] = [];
+
+  constructor(public store: DataStore) { }
+
+  addWagon() {
+    this.store.addWagon({
+      id: -1,
+      serialNumber: "asdasds",
+      yearOfProduction: 1,
+      ownerId: 1,
+      deleted: false,
+      siteId: 1
+    })
+  }
 
   ngOnInit(): void {
+    this.store.state$
+      .pipe(
+        map(state => state.wagons))
+      .subscribe(data => {
+        this.wagons = data;
+      })
   }
 
 }

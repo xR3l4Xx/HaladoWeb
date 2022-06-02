@@ -8,13 +8,15 @@ export interface Wagon {
     serialNumber: string;
     yearOfProduction: number;
     ownerId: number;
-    readonly siteId: number;
+    deleted: boolean;
+    siteId: number;
 }
 
 export interface Site {
     id: number;
     name: string;
-    postalAddress: string;
+    postalCode: number;
     code: string;
+    deleted: boolean;
     ownerId: number;
 }
