@@ -1,5 +1,36 @@
-<div *ngFor="let site of sites">
-    {{site.id}} - {{site.name}} - {{site.deleted}}
-    <button (click)="onDeleteSite(site)">Delete</button>
-    <button (click)="onEditSite(site)">Edit</button>
-</div>
+<table class="table">
+    <thead>
+        <tr>
+            <th>Code</th>
+            <th>Name</th>
+            <th>Postal Code</th>
+            <th>Owner</th>
+            <th>Actions</th>
+        </tr>
+    </thead>
+    <tbody>
+        <tr *ngFor="let site of sites">
+            <th>{{site.code}}</th>
+            <th>{{site.name}}</th>
+            <th>{{site.postalCode}}</th>
+            <th>{{inferOwnerName(site)}}</th>
+            <th>
+                <div class="btn-group">
+                    <button class="btn btn-sm btn-primary">Show</button>
+                    <button class="btn btn-sm btn-secondary" (click)="onEditSite(site)">Edit</button>
+                    <button 
+                        *ngIf="site.deleted; else elseCase" 
+                        class="btn btn-sm btn-success" 
+                        (click)="onRestoreSite(site)"
+                    >
+                        Restore
+                    </button>
+                    
+                    <ng-template #elseCase>
+                        <button #elseCase class="btn btn-sm btn-danger" (click)="onDeleteSite(site)">Delete</button>
+                    </ng-template>                    
+                </div>
+            </th>
+        </tr>
+    </tbody>
+</table>
