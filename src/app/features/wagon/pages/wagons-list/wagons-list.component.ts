@@ -2,9 +2,11 @@ import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Wagon } from 'app/core/models';
 import { DataStore } from 'app/core/stores';
-import { takeUntil, map } from 'rxjs';
+import { takeUntil, map, filter } from 'rxjs';
 import { CreateWagonComponent } from '../../components/create-wagon/create-wagon.component';
 import { EditWagonComponent } from '../../components/edit-wagon/edit-wagon.component';
+
+
 
 @Component({
   selector: 'app-wagons-list',
@@ -14,6 +16,7 @@ import { EditWagonComponent } from '../../components/edit-wagon/edit-wagon.compo
 export class WagonsListComponent implements OnInit {
 
   wagons: Wagon[] = [];
+  showDeleted: boolean = false;
 
   constructor(public store: DataStore, public modalService: NgbModal) { }
 
@@ -47,15 +50,30 @@ export class WagonsListComponent implements OnInit {
     modalRef.componentInstance.saveWagon = (wagon: Wagon) => this.onUpdateWagon(wagon);
   }
 
-  
+  updateFilter(): void {
 
-  ngOnInit(): void {
-    this.store.state$
+    this.wagons = [];
+
+    if(this.showDeleted){
+      this.store.state$
       .pipe(
         map(state => state.wagons))
       .subscribe(data => {
         this.wagons = data.sort((a, b) => a.id - b.id);
       })
+    }else{
+      this.store.state$
+      .pipe(
+        map(state => state.wagons))
+      .subscribe(data => {
+        this.wagons = data.filter(wagon => wagon.deleted == false);
+        this.wagons = this.wagons.sort((a, b) => a.id - b.id);
+      })
+    }
+  }
+
+  ngOnInit(): void {
+    this.updateFilter();
   }
 
 }
