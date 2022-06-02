@@ -29,8 +29,9 @@ export class WagonsListComponent implements OnInit {
 
   onUpdateWagon(wagon: Wagon) {
     console.log("UPDATE")
-    console.log(this.store)
+    console.log(wagon)
     this.store.updateWagon(wagon);
+    console.log(wagon)
   }
 
   openEditWagonModal(wagon: Wagon) {
