@@ -25,7 +25,11 @@ export class DataStore extends Store<DatabaseState> {
     }
 
     updateWagon(wagon: Wagon): void {
-
+        const wagonId = wagon.id;
+        this.setState({
+            ...this.state,
+            wagons: [...this.state.wagons.filter(w => w.id != wagonId), wagon]
+        });
     }
 
     addSite(site: Site): void {
@@ -33,7 +37,7 @@ export class DataStore extends Store<DatabaseState> {
     }
 
     updateSite(site: Site): void {
-        
+
     }
 
     addOwner(owner: Owner): void {
