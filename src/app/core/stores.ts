@@ -33,7 +33,12 @@ export class DataStore extends Store<DatabaseState> {
     }
 
     addSite(site: Site): void {
-
+        const maxId = this.state.sites.length > 0 ? Math.max(...this.state.sites.map(wagon => wagon.id)) : 0;
+        site.id = maxId + 1;
+        this.setState({
+            ...this.state,
+            sites: [...this.state.sites, site]
+        })
     }
 
     updateSite(site: Site): void {

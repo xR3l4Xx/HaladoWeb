@@ -4,6 +4,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataStore } from 'app/core/stores';
 import { map } from 'rxjs';
 import { SiteService } from '../../services/site.service';
+import { SiteCreateComponent } from '../../components/site-create/site-create.component';
 
 @Component({
   selector: 'app-sites-list',
@@ -17,16 +18,10 @@ export class SitesListComponent implements OnInit {
   constructor(public siteService: SiteService, public modalService: NgbModal) { }
 
   addSite() {
-
-  }
-
-  openEditSiteModal(site: Site) {
-
+    this.modalService.open(SiteCreateComponent);
   }
 
   ngOnInit(): void {
     this.siteService.fetchAllSites((sites: Site[]) => this.sites = sites.sort((a: Site, b: Site) => a.id - b.id))
-    
   }
-
 }

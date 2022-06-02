@@ -1,0 +1,34 @@
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">New site #{{site?.code}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="mb-3">
+            <label for="name">Name</label>
+            <div class="input-group">
+                <input class="form-control" [(ngModel)]="site.name" name="name">
+            </div>
+
+            <label for="postalCode">Postal Code</label>
+            <div class="input-group">
+                <input type="number" class="form-control" [(ngModel)]="site.postalCode" name="postalCode">
+            </div>
+
+            <label for="code">Code</label>
+            <div class="input-group">
+                <input type="text" class="form-control" [(ngModel)]="site.code" name="code">
+            </div>
+
+            <label for="yearOfProduction">Owner</label>
+            <div class="input-group">
+                <select class="form-control" [(ngModel)]="site.ownerId" [ngModelOptions]="{standalone: true}">
+                    <option *ngFor="let owner of owners" [ngValue]="owner.id">{{owner.name}}</option>
+                </select>
+            </div>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="onSave(); activeModal.close()">Save</button>
+</div>

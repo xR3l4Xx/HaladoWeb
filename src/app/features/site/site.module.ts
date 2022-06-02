@@ -6,13 +6,15 @@ import { SitesListComponent } from './pages/sites-list/sites-list.component';
 import { SiteTableComponent } from './components/site-table/site-table.component';
 import { SiteEditComponent } from './components/site-edit/site-edit.component';
 import { SharedModule } from 'app/shared/shared.module';
+import { SiteCreateComponent } from './components/site-create/site-create.component';
 
 
 @NgModule({
   declarations: [
     SitesListComponent,
     SiteTableComponent,
-    SiteEditComponent
+    SiteEditComponent,
+    SiteCreateComponent
   ],
   imports: [
     CommonModule,
