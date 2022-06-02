@@ -1,4 +1,5 @@
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit } from '@angular/core';
+import { NgbActiveModal, NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Wagon } from 'app/core/models';
 
 @Component({
@@ -9,10 +10,16 @@ import { Wagon } from 'app/core/models';
 export class EditWagonComponent implements OnInit {
 
   @Input() wagon!: Wagon;
+  @Input() saveWagon!: Function;
 
-  constructor() { }
+  constructor(public activeModal: NgbActiveModal) { }
+
+  onSave() {
+    this.saveWagon(this.wagon);
+  }
 
   ngOnInit(): void {
+    
   }
 
 }

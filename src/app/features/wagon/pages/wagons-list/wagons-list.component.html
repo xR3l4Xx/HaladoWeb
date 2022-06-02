@@ -1,9 +1,8 @@
 <p>wagons-list works!</p>
 
 <div *ngFor="let wagon of wagons">
-    {{wagon.id}}
+    {{wagon.id}} - {{wagon.yearOfProduction}}
+    <button (click)="openEditWagonModal(wagon)">Edit</button>
 </div>
 
 <button (click)="addWagon()">add</button>
-
-<ngb-alert>...</ngb-alert>

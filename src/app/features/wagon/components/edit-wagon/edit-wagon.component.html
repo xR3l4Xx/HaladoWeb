@@ -1,5 +1,26 @@
-<p>edit-wagon works!</p>
+<div class="modal-header">
+    <h4 class="modal-title" id="modal-basic-title">Edit wagon #{{wagon?.id}}</h4>
+    <button type="button" class="btn-close" aria-label="Close" (click)="activeModal.dismiss()"></button>
+</div>
+<div class="modal-body">
+    <form>
+        <div class="mb-3">
+            <label for="serialNumber">Serial number</label>
+            <div class="input-group">
+                <input class="form-control" [(ngModel)]="wagon.serialNumber" name="serialNumber">
+            </div>
 
+            <label for="yearOfProduction">Year of production</label>
+            <div class="input-group">
+                <input type="number" class="form-control" [(ngModel)]="wagon.yearOfProduction" name="yearOfProduction">
+            </div>
 
+            <label for="yearOfProduction">Owner</label>
 
-{{wagon.id}}
+            <label for="yearOfProduction">Site</label>
+        </div>
+    </form>
+</div>
+<div class="modal-footer">
+    <button type="button" class="btn btn-outline-dark" (click)="onSave(); activeModal.close()">Save</button>
+</div>
