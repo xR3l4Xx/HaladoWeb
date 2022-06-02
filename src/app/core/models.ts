@@ -7,6 +7,7 @@ export interface Wagon {
     id: number,
     serialNumber: string;
     yearOfProduction: number;
+    fleetNumber: string;
     ownerId: number;
     deleted: boolean;
     siteId: number;

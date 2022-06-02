@@ -15,14 +15,19 @@
                 <input type="number" class="form-control" [(ngModel)]="wagon.yearOfProduction" name="yearOfProduction">
             </div>
 
-            <label for="yearOfProduction">Owner</label>
+            <label for="fleetNumber">Fleet number</label>
+            <div class="input-group">
+                <input type="text" class="form-control" [(ngModel)]="wagon.fleetNumber" name="fleetNumber">
+            </div>
+
+            <label for="owner">Owner</label>
             <div class="input-group">
                 <select class="form-control" [(ngModel)]="wagon.ownerId" [ngModelOptions]="{standalone: true}">
                     <option *ngFor="let owner of owners" [ngValue]="owner.id">{{owner.name}}</option>
                 </select>
             </div>
 
-            <label for="yearOfProduction">Site</label>
+            <label for="site">Site</label>
             <div class="input-group">
                 <select class="form-control" [(ngModel)]="wagon.siteId" [ngModelOptions]="{standalone: true}">
                     <option *ngFor="let site of sites" [ngValue]="site.id">{{site.name}}</option>
