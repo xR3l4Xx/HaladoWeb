@@ -12,8 +12,8 @@ export const sites: Site[] = [
 ];
 
 export const wagons: Wagon[] = [
-    { id: 1, serialNumber: "Bhv", yearOfProduction: 1956, ownerId: 1, siteId: 1, deleted: false },
-    { id: 2, serialNumber: "BDbhv", yearOfProduction: 2000, ownerId: 1, siteId: 1, deleted: false },
-    { id: 3, serialNumber: "Bhv", yearOfProduction: 1980, ownerId: 2, siteId: 2, deleted: false },
-    { id: 4, serialNumber: "AcBc", yearOfProduction: 1998, ownerId: 2, siteId: 3, deleted: false },
+    { id: 1, serialNumber: "505520055554", yearOfProduction: 1956, ownerId: 1, siteId: 1, deleted: false },
+    { id: 2, serialNumber: "505520055553", yearOfProduction: 2000, ownerId: 1, siteId: 1, deleted: false },
+    { id: 3, serialNumber: "505520055552", yearOfProduction: 1980, ownerId: 2, siteId: 2, deleted: false },
+    { id: 4, serialNumber: "505520055551", yearOfProduction: 1998, ownerId: 2, siteId: 3, deleted: false },
 ];

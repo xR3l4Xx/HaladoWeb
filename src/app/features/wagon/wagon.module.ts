@@ -6,13 +6,15 @@ import { WagonsListComponent } from './pages/wagons-list/wagons-list.component';
 import { EditWagonComponent } from './components/edit-wagon/edit-wagon.component';
 import { SharedModule } from 'app/shared/shared.module';
 import { CreateWagonComponent } from './components/create-wagon/create-wagon.component';
+import { SerialNumberPipe } from 'app/features/wagon/serial-number.pipe';
 
 
 @NgModule({
   declarations: [
     WagonsListComponent,
     EditWagonComponent,
-    CreateWagonComponent
+    CreateWagonComponent,
+    SerialNumberPipe
   ],
   imports: [
     CommonModule,

@@ -1,7 +1,7 @@
 <p>wagons-list works!</p>
 
 <div *ngFor="let wagon of wagons">
-    {{wagon.id}} - {{wagon.yearOfProduction}}
+    {{wagon.id}} - {{wagon.yearOfProduction}} {{wagon.serialNumber | serialNumber}}
     <button (click)="openEditWagonModal(wagon)">Edit</button>
 </div>
 
