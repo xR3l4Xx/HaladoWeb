@@ -1,1 +1,6 @@
-<p>sites-list works!</p>
+<div *ngFor="let site of sites">
+    {{site.id}} - {{site.name}}
+    <button (click)="openEditSiteModal(site)">Edit</button>
+</div>
+
+<button (click)="addSite()">add</button>
