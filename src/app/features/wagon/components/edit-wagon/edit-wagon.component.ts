@@ -28,7 +28,7 @@ export class EditWagonComponent implements OnInit {
       .pipe(
         map(state => state.sites))
       .subscribe(data => {
-        this.sites = data;
+        this.sites = data.filter((site: Site) => !site.deleted);
       })
 
       this.store.state$
