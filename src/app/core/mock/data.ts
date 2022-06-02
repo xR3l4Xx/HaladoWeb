@@ -12,8 +12,8 @@ export const sites: Site[] = [
 ];
 
 export const wagons: Wagon[] = [
-    { id: 1, serialNumber: "Bhv", yearOfProduction: 1956, fleetNumber: "50 55 20-05 555-7", ownerId: 1, siteId: 1, deleted: false },
-    { id: 2, serialNumber: "BDbhv", yearOfProduction: 2000, fleetNumber: "50 55 22-15 600-3", ownerId: 1, siteId: 1, deleted: false },
-    { id: 3, serialNumber: "Bhv", yearOfProduction: 1980, fleetNumber: "50 55 20-05 800-2", ownerId: 2, siteId: 2, deleted: true },
-    { id: 4, serialNumber: "AcBc", yearOfProduction: 1998, fleetNumber: "50 20 30-23 555-8", ownerId: 2, siteId: 3, deleted: false },
+    { id: 1, serialNumber: "Bhv", yearOfProduction: 1956, fleetNumber: "505520055551", ownerId: 1, siteId: 1, deleted: false },
+    { id: 2, serialNumber: "BDbhv", yearOfProduction: 2000, fleetNumber: "505520055257", ownerId: 1, siteId: 1, deleted: false },
+    { id: 3, serialNumber: "Bhv", yearOfProduction: 1980, fleetNumber: "505520055457", ownerId: 2, siteId: 2, deleted: true },
+    { id: 4, serialNumber: "AcBc", yearOfProduction: 1998, fleetNumber: "505520056557", ownerId: 2, siteId: 3, deleted: false },
 ];
