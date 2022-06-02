@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Wagon } from 'app/core/models';
 import { DataStore } from 'app/core/stores';
 import { takeUntil, map } from 'rxjs';
+import { CreateWagonComponent } from '../../components/create-wagon/create-wagon.component';
 import { EditWagonComponent } from '../../components/edit-wagon/edit-wagon.component';
 
 @Component({
@@ -16,15 +17,21 @@ export class WagonsListComponent implements OnInit {
 
   constructor(public store: DataStore, public modalService: NgbModal) { }
 
-  addWagon() {
-    this.store.addWagon({
+  onAddWagon(wagon: Wagon) {
+    this.store.addWagon(wagon)
+  }
+
+  openCreateWagonModal() {
+    const modalRef = this.modalService.open(CreateWagonComponent)
+    modalRef.componentInstance.wagon = {
       id: -1,
-      serialNumber: "asdasds",
-      yearOfProduction: 1,
+      serialNumber: "",
+      yearOfProduction: 0,
       ownerId: 1,
       deleted: false,
       siteId: 1
-    })
+    };
+    modalRef.componentInstance.saveWagon = (wagon: Wagon) => this.onAddWagon(wagon);
   }
 
   onUpdateWagon(wagon: Wagon) {
