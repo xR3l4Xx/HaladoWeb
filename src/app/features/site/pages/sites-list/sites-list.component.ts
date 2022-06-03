@@ -13,15 +13,9 @@ import { SiteCreateComponent } from '../../components/site-create/site-create.co
 })
 export class SitesListComponent implements OnInit {
 
-  sites: Site[] = [];
-
-  constructor(public siteService: SiteService, public modalService: NgbModal) { }
-
-  addSite() {
-    this.modalService.open(SiteCreateComponent);
-  }
+  constructor() { }
 
   ngOnInit(): void {
-    this.siteService.fetchAllSites((sites: Site[]) => this.sites = sites.sort((a: Site, b: Site) => a.id - b.id))
+    
   }
 }

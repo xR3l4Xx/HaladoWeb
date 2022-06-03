@@ -1,4 +1,6 @@
 import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { DataTableDirective } from 'angular-datatables';
 import { Site, Wagon } from 'app/core/models';
@@ -21,14 +23,16 @@ export class WagonsListComponent implements OnInit {
   sites!: Site[];
   showDeleted: boolean = false;
 
+  siteId: number = 0;
+
   @ViewChild(DataTableDirective, {static: false})
   dtElement: DataTableDirective | undefined;
-  
+
   dtOptions: DataTables.Settings = {};
   dtTrigger: Subject<any> = new Subject();
 
   constructor(public store: DataStore, public modalService: NgbModal,
-    public siteService: SiteService) { }
+    public siteService: SiteService, private route: ActivatedRoute,) { }
 
   onAddWagon(wagon: Wagon) {
     this.store.addWagon(wagon)
@@ -76,17 +80,19 @@ export class WagonsListComponent implements OnInit {
 
     this.wagons = [];
 
+    console.log(this.siteId);
+
     if(this.showDeleted){
       this.store.state$
       .pipe(
-        map(state => state.wagons))
+        map(state => state.wagons.filter(wagon => this.siteId > 0 ? wagon.siteId == this.siteId : true)))
       .subscribe(data => {
         this.wagons = data.sort((a, b) => a.id - b.id);
       })
     }else{
       this.store.state$
       .pipe(
-        map(state => state.wagons.filter(wagon => wagon.deleted == false)))
+        map(state => state.wagons.filter(wagon => (wagon.deleted == false) && (this.siteId > 0 ? wagon.siteId == this.siteId : true))))
       .subscribe(data => {
           this.wagons = data.sort((a, b) => a.id - b.id);
       })
@@ -99,6 +105,15 @@ export class WagonsListComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.route.queryParams.subscribe(params => {
+      const id = params['id'];
+      if(id != null && id != undefined){
+        this.siteId = Number(id);
+      }else{
+        this.siteId = 0;
+      }
+      console.log("id:" + id);
+    });
     this.updateFilter();
     this.siteService.fetchAllSites((sites: Site[]) => this.sites = sites)
     this.dtOptions = {

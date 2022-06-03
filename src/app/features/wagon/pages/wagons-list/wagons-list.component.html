@@ -1,7 +1,8 @@
 <h1>Wagons</h1>
 
 <div class="form-check form-switch">
-    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="showDeleted" (change)="updateFilter()">
+    <input class="form-check-input" type="checkbox" role="switch" id="flexSwitchCheckDefault" [(ngModel)]="showDeleted"
+        (change)="updateFilter()">
     <label class="form-check-label" for="flexSwitchCheckDefault">Show deleted wagons</label>
 </div>
 
@@ -27,7 +28,8 @@
     </tbody>
     <tfoot>
         <tr>
-            <td colspan="4" class="text-end"><button (click)="openCreateWagonModal()" class="btn btn-primary">Add</button></td>
+            <td colspan="4" class="text-end"><button (click)="openCreateWagonModal()"
+                    class="btn btn-primary">Add</button></td>
         </tr>
     </tfoot>
 </table>
