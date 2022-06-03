@@ -18,7 +18,7 @@
         <tr *ngFor="let wagon of wagons">
             <td scope="row">{{wagon.serialNumber}}</td>
             <td>{{wagon.fleetNumber | serialNumber}}</td>
-            <td>{{wagon.siteId}}</td>
+            <td>{{inferSiteName(wagon.siteId)}}</td>
             <td><button (click)="openEditWagonModal(wagon)" class="btn btn-secondary">Edit</button></td>
         </tr>
     </tbody>
