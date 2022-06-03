@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule } from '@angular/forms';
 import { SerialNumberPipe } from '../features/wagon/serial-number.pipe';
+import { DataTablesModule } from 'angular-datatables';
 
 
 
@@ -11,11 +12,13 @@ import { SerialNumberPipe } from '../features/wagon/serial-number.pipe';
   imports: [
     CommonModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ],
   exports: [
     NgbModule,
-    FormsModule
+    FormsModule,
+    DataTablesModule
   ]
 })
 export class SharedModule { }
