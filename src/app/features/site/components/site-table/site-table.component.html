@@ -11,9 +11,9 @@
     <tbody>
         <tr *ngFor="let site of sites">
             <th>{{site.code}}</th>
-            <th>{{site.name}}</th>
-            <th>{{site.postalCode}}</th>
-            <th>{{inferOwnerName(site)}}</th>
+            <td>{{site.name}}</td>
+            <td>{{site.postalCode}}</td>
+            <td>{{inferOwnerName(site)}}</td>
             <th>
                 <div class="btn-group">
                     <button class="btn btn-sm btn-primary">Show</button>
