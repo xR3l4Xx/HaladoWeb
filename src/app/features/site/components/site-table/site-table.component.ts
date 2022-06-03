@@ -3,6 +3,7 @@ import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { Owner, Site } from 'app/core/models';
 import { OwnerService } from 'app/shared/owner.service';
 import { SiteService } from '../../services/site.service';
+import { SiteCreateComponent } from '../site-create/site-create.component';
 import { SiteEditComponent } from '../site-edit/site-edit.component';
 
 @Component({
@@ -29,6 +30,10 @@ export class SiteTableComponent implements OnInit {
   onEditSite(site: Site) {
     const modalRef = this.modalService.open(SiteEditComponent)
     modalRef.componentInstance.site = {...site};
+  }
+
+  addSite() {
+    this.modalService.open(SiteCreateComponent);
   }
 
   inferOwnerName(site: Site) {
