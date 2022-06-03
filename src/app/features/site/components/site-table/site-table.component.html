@@ -1,4 +1,4 @@
-<table class="table">
+<table class="table table-striped hover" datatable>
     <thead>
         <tr>
             <th>Code</th>
@@ -18,17 +18,13 @@
                 <div class="btn-group">
                     <button class="btn btn-sm btn-primary">Show</button>
                     <button class="btn btn-sm btn-secondary" (click)="onEditSite(site)">Edit</button>
-                    <button 
-                        *ngIf="site.deleted; else elseCase" 
-                        class="btn btn-sm btn-success" 
-                        (click)="onRestoreSite(site)"
-                    >
+                    <button *ngIf="site.deleted; else elseCase" class="btn btn-sm btn-success" (click)="onRestoreSite(site)">
                         Restore
                     </button>
-                    
+
                     <ng-template #elseCase>
                         <button #elseCase class="btn btn-sm btn-danger" (click)="onDeleteSite(site)">Delete</button>
-                    </ng-template>                    
+                    </ng-template>
                 </div>
             </th>
         </tr>
