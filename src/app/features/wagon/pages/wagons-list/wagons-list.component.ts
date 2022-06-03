@@ -57,6 +57,7 @@ export class WagonsListComponent implements OnInit {
     console.log("UPDATE")
     console.log(wagon)
     this.store.updateWagon(wagon);
+    this.updateFilter();
     console.log(wagon)
   }
 
@@ -64,6 +65,11 @@ export class WagonsListComponent implements OnInit {
     const modalRef = this.modalService.open(EditWagonComponent)
     modalRef.componentInstance.wagon = {...wagon};
     modalRef.componentInstance.saveWagon = (wagon: Wagon) => this.onUpdateWagon(wagon);
+  }
+
+  onDeleteWagon(wagon: Wagon){
+    wagon.deleted = true;
+    this.onUpdateWagon(wagon);
   }
 
   updateFilter(): void {
