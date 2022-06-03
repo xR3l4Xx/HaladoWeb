@@ -1,9 +1,10 @@
-import { Component, OnInit, Output, EventEmitter } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter, ViewChild } from '@angular/core';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
+import { DataTableDirective } from 'angular-datatables';
 import { Site, Wagon } from 'app/core/models';
 import { DataStore } from 'app/core/stores';
 import { SiteService } from 'app/features/site/services/site.service';
-import { takeUntil, map, filter } from 'rxjs';
+import { Subject, takeUntil, map, filter } from 'rxjs';
 import { CreateWagonComponent } from '../../components/create-wagon/create-wagon.component';
 import { EditWagonComponent } from '../../components/edit-wagon/edit-wagon.component';
 
@@ -20,11 +21,18 @@ export class WagonsListComponent implements OnInit {
   sites!: Site[];
   showDeleted: boolean = false;
 
+  @ViewChild(DataTableDirective, {static: false})
+  dtElement: DataTableDirective | undefined;
+  
+  dtOptions: DataTables.Settings = {};
+  dtTrigger: Subject<any> = new Subject();
+
   constructor(public store: DataStore, public modalService: NgbModal,
     public siteService: SiteService) { }
 
   onAddWagon(wagon: Wagon) {
     this.store.addWagon(wagon)
+    this.updateFilter();
   }
 
   openCreateWagonModal() {
@@ -72,17 +80,35 @@ export class WagonsListComponent implements OnInit {
     }else{
       this.store.state$
       .pipe(
-        map(state => state.wagons))
+        map(state => state.wagons.filter(wagon => wagon.deleted == false)))
       .subscribe(data => {
-        this.wagons = data.filter(wagon => wagon.deleted == false);
-        this.wagons = this.wagons.sort((a, b) => a.id - b.id);
+          this.wagons = data.sort((a, b) => a.id - b.id);
       })
     }
+
+    this.dtElement?.dtInstance.then((dtInstance: DataTables.Api) => {
+      dtInstance.destroy();
+      this.dtTrigger.next(void 0);
+    });
   }
 
   ngOnInit(): void {
     this.updateFilter();
     this.siteService.fetchAllSites((sites: Site[]) => this.sites = sites)
+    this.dtOptions = {
+      pagingType: 'full_numbers',
+      pageLength: 5,
+      processing: true
+    };
+  }
+
+  ngAfterViewInit(): void {
+    this.dtTrigger.next(void 0);
+  }
+
+  ngOnDestroy(): void {
+    // Do not forget to unsubscribe the event
+    this.dtTrigger.unsubscribe();
   }
 
 }
