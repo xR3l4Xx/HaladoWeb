@@ -1,12 +1,13 @@
 import { Component, Input, OnInit, ViewChild } from '@angular/core';
 import { DataTableDirective } from 'angular-datatables';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
-import { Owner, Site } from 'app/core/models';
+import { Owner, Site, Wagon } from 'app/core/models';
 import { OwnerService } from 'app/shared/owner.service';
 import { SiteService } from '../../services/site.service';
 import { SiteCreateComponent } from '../site-create/site-create.component';
 import { SiteEditComponent } from '../site-edit/site-edit.component';
 import { Subject } from 'rxjs';
+import { WagonService } from 'app/features/wagon/services/wagon.service';
 
 @Component({
   selector: 'app-site-table',
@@ -25,16 +26,21 @@ export class SiteTableComponent implements OnInit {
   dtTrigger: Subject<any> = new Subject();
 
   constructor(public siteService: SiteService, public ownerService: OwnerService, 
-    public modalService: NgbModal) { }
+    public modalService: NgbModal, private wagonService: WagonService) { }
 
   onDeleteSite(site: Site) {
-    this.siteService.deleteSite(site);
-    this.updateTable();
+    var noWagons = 0;
+    this.wagonService.fetchBySiteId(site.id, (wagons: Wagon[]) => noWagons = wagons.length);
+    if(noWagons > 0){
+      alert("This site has at least one wagon!")
+    }else{
+      this.siteService.deleteSite(site);
+      //this.updateTable();
+    }
   }
 
   onRestoreSite(site: Site) {
     this.siteService.updateSite({...site, deleted: false})
-    this.updateTable();
   }
 
   onEditSite(site: Site) {
